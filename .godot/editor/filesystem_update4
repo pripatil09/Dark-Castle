@@ -1,0 +1,6 @@
+res://scenes/Main.tscn
+res://scripts/NoitaWorldGenerator.gd
+res://scenes/Projectile.tscn
+res://scripts/MaterialSystem.gd
+res://scripts/Player.gd
+res://scripts/DungeonGenerator.gd
