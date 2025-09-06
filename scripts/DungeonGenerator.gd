@@ -3,11 +3,11 @@ extends Node2D
 # Procedural Dungeon Generator
 # Creates unique dungeon layouts with rooms, corridors, and special areas
 
-@export var dungeon_width = 80
-@export var dungeon_height = 60
+@export var dungeon_width = 200
+@export var dungeon_height = 100
 @export var room_size_min = 6
 @export var room_size_max = 15
-@export var max_rooms = 40
+@export var max_rooms = 70
 
 var tile_size = 24
 var dungeon_map = []
@@ -20,10 +20,6 @@ func _ready():
 # Removed input handling - dungeon regeneration should be controlled elsewhere
 
 func generate_dungeon():
-	print("=== GENERATING PROCEDURAL DUNGEON ===")
-	print("Dungeon size: ", dungeon_width, "x", dungeon_height)
-	print("Tile size: ", tile_size)
-	print("Target rooms: ", max_rooms)
 	
 	# Clear previous dungeon
 	rooms.clear()
@@ -31,7 +27,6 @@ func generate_dungeon():
 	
 	# Initialize empty dungeon
 	initialize_dungeon()
-	print("Dungeon initialized with walls")
 	
 	# Generate rooms
 	generate_rooms()
@@ -45,10 +40,6 @@ func generate_dungeon():
 	# Render the dungeon
 	render_dungeon()
 	
-	print("=== DUNGEON GENERATION COMPLETE ===")
-	print("Final result: ", rooms.size(), " rooms and ", corridors.size(), " corridor tiles")
-	print("Total floor tiles: ", get_floor_tiles().size())
-	print("=====================================")
 
 func initialize_dungeon():
 	# Fill with walls
@@ -62,7 +53,6 @@ func generate_rooms():
 	var attempts = 0
 	var max_attempts = 1000
 	
-	print("Starting room generation...")
 	
 	# Start with simple rectangle rooms only to ensure they work
 	while rooms.size() < max_rooms and attempts < max_attempts:
@@ -86,9 +76,7 @@ func generate_rooms():
 				rooms.append(new_room)
 				# Carve out the room
 				carve_room(new_room)
-				print("Room ", rooms.size(), " added at: ", new_room.position, " size: ", new_room.size)
 	
-	print("Room generation complete. Generated ", rooms.size(), " rooms after ", attempts, " attempts")
 
 func generate_rectangle_room() -> Rect2:
 	# Standard rectangle room
@@ -104,7 +92,6 @@ func generate_rectangle_room() -> Rect2:
 	var y = randi_range(1, dungeon_height - room_height - 1)
 	
 	# Debug output
-	print("Attempting room: pos(", x, ",", y, ") size(", room_width, "x", room_height, ")")
 	
 	return Rect2(x, y, room_width, room_height)
 
@@ -198,14 +185,12 @@ func carve_room(room: Rect2):
 				dungeon_map[room_y][room_x] = 0  # Floor
 
 func connect_rooms():
-	print("Starting corridor generation...")
 	# Use a more efficient connection algorithm
 	# First, create a minimum spanning tree to ensure all rooms are connected
 	connect_rooms_mst()
 	
 	# Add a few random connections for variety (but not too many)
 	add_random_connections()
-	print("Corridor generation complete. Generated ", corridors.size(), " corridor tiles")
 
 func connect_rooms_mst():
 	# Minimum Spanning Tree approach - connects all rooms with minimal corridors
@@ -305,15 +290,12 @@ func add_treasure_room(room: Rect2):
 	var center = room.get_center()
 	var chest_pos = Vector2(int(center.x), int(center.y))
 	# Mark as treasure room (we'll handle this in rendering)
-	print("Treasure room at: ", chest_pos)
 
 func add_boss_room(room: Rect2):
 	# Mark as boss room
 	var center = room.get_center()
-	print("Boss room at: ", center)
 
 func render_dungeon():
-	print("Starting dungeon rendering...")
 	# Clear existing tiles
 	for child in get_children():
 		child.queue_free()
@@ -330,7 +312,6 @@ func render_dungeon():
 			else:
 				wall_count += 1
 	
-	print("Rendering complete. Floor tiles: ", floor_count, " Wall tiles: ", wall_count)
 
 func create_tile(x: int, y: int, tile_type: int):
 	var tile = ColorRect.new()
@@ -344,10 +325,13 @@ func create_tile(x: int, y: int, tile_type: int):
 			tile.color = Color(0.1, 0.1, 0.1)  # Very dark gray
 			# Add collision for walls
 			var collision = StaticBody2D.new()
+			collision.collision_layer = 1  # Set collision layer to 1
+			collision.collision_mask = 0   # Walls don't need to collide with anything
 			var collision_shape = CollisionShape2D.new()
 			var rectangle_shape = RectangleShape2D.new()
-			rectangle_shape.size = Vector2(tile_size, tile_size)
+			rectangle_shape.size = Vector2(tile_size, tile_size)  # Match visual tiles exactly
 			collision_shape.shape = rectangle_shape
+			collision_shape.position = Vector2(12,12)  # No offset - match visual tiles exactly
 			collision.add_child(collision_shape)
 			collision.position = Vector2(x * tile_size, y * tile_size)
 			add_child(collision)
@@ -367,16 +351,13 @@ func get_random_floor_position() -> Vector2:
 	if floor_tiles.size() > 0:
 		var random_tile = floor_tiles[randi() % floor_tiles.size()]
 		var world_pos = Vector2(random_tile.x * tile_size + tile_size/2, random_tile.y * tile_size + tile_size/2)
-		print("Spawning player at tile: ", random_tile, " world pos: ", world_pos)
 		return world_pos
 	else:
-		print("ERROR: No floor tiles found for player spawning!")
 		# Try to find any floor tile by scanning the map
 		for y in range(dungeon_height):
 			for x in range(dungeon_width):
 				if dungeon_map[y][x] == 0:
 					var world_pos = Vector2(x * tile_size + tile_size/2, y * tile_size + tile_size/2)
-					print("Found fallback floor tile at: ", world_pos)
 					return world_pos
 		# Last resort fallback
 		return Vector2(100, 100)

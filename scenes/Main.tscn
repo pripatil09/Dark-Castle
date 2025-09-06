@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxv8k7j8k7j8"]
+[gd_scene load_steps=9 format=3 uid="uid://bqxv8k7j8k7j8"]
 
 [ext_resource type="Script" uid="uid://dvc8da8yxnbtn" path="res://scripts/DungeonGenerator.gd" id="1_dungeon"]
 [ext_resource type="Script" uid="uid://dbjf04ds8mkxq" path="res://scripts/Player.gd" id="2_player"]
+[ext_resource type="Script" uid="uid://bqv5myhmolknn" path="res://scripts/AudioManager.gd" id="3_audio"]
+[ext_resource type="AudioStream" uid="uid://bfurv8403xjn3" path="res://mysterious-dark-background-310162.mp3" id="4_mysterious"]
+[ext_resource type="AudioStream" uid="uid://ldl7xeit6weq" path="res://piano-mystery-tense-cinematic-drone-333955.mp3" id="5_piano"]
+[ext_resource type="AudioStream" uid="uid://brsl5k1ae405q" path="res://strange-phenomena-dark-mysterious-ambient-385453.mp3" id="6_strange"]
+[ext_resource type="Script" uid="uid://mhyjp5bto48h" path="res://scripts/Spotlight.gd" id="7_spotlight"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(16, 16)
+size = Vector2(8, 8)
 
 [node name="Main" type="Node2D"]
 
@@ -12,26 +17,61 @@ size = Vector2(16, 16)
 script = ExtResource("1_dungeon")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(400, 300)
+collision_layer = 2
 script = ExtResource("2_player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_1")
 
 [node name="Sprite2D" type="ColorRect" parent="Player"]
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
 color = Color(0, 0.8, 1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 
-[node name="HealthBar" type="ProgressBar" parent="Player"]
-offset_left = -8.0
-offset_top = -15.0
-offset_right = 8.0
-offset_bottom = -12.0
-value = 100.0
+[node name="HealthBar" type="Control" parent="Player"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = -20.0
+
+[node name="HealthBarBackground" type="ColorRect" parent="Player/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="HealthBarFill" type="ColorRect" parent="Player/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 1, 0, 1)
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("3_audio")
+
+[node name="MysteriousMusic" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("4_mysterious")
+
+[node name="PianoMusic" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("5_piano")
+
+[node name="StrangeMusic" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("6_strange")
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="AudioManager"]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -40,3 +80,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="OverlayUI" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spotlight" type="ColorRect" parent="UILayer/OverlayUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.8)
+script = ExtResource("7_spotlight")
