@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Dark Castle"
 run/main_scene="res://scenes/Main.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus", "Mobile")
 config/icon="res://icon.svg"
 
 [display]
@@ -76,3 +76,4 @@ ui_zoom_out={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.web="gl_compatibility"
