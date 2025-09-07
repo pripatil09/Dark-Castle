@@ -2,3 +2,4 @@ res://scripts/Player.gd
 res://scenes/Main.tscn
 res://shaders/vignette.gdshader
 res://shaders/simple_spotlight.gdshader
+res://scripts/Spotlight.gd

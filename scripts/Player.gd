@@ -597,7 +597,7 @@ func update_animations(delta: float):
 		sprite.modulate = Color(1.1, 0.9, 0.9, 0.9)  # Slight glow
 		sprite.scale = Vector2(0.2, 0.2)  # 5x larger
 	else:
-		sprite.modulate = Color.WHITE
+		sprite.modulate = Color(0.5, 0.5, 0.5, 0.7)  # Slightly darkened
 		sprite.scale = Vector2(0.2, 0.2)  # 5x larger
 		sprite.rotation = 0
 
