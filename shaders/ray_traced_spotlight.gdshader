@@ -2,17 +2,19 @@ shader_type canvas_item;
 
 uniform sampler2D visibility_texture;
 uniform vec2 player_pos;
-uniform float radius;
-uniform float texture_scale;
-uniform float ray_thickness : hint_range(0.1, 2.0) = 0.5;
-uniform float anti_aliasing_strength : hint_range(0.0, 1.0) = 0.8;
+uniform float radius : hint_range(0.1, 1.0) = 0.4;
+uniform float texture_scale : hint_range(0.5, 3.0) = 2.0;
+uniform float ray_thickness : hint_range(0.1, 2.0) = 1.0;
+uniform float anti_aliasing_strength : hint_range(0.0, 1.0) = 0.9;
+uniform float edge_softness : hint_range(0.0, 0.1) = 0.02;
+uniform float vignette_strength : hint_range(0.0, 1.0) = 0.3;
 
 void fragment() {
 	vec4 visibility_color = texture(visibility_texture, UV);
 	
 	// Create smooth circular spotlight with enhanced anti-aliasing
 	float distance = length(UV - player_pos);
-	float circle_alpha = 1.0 - smoothstep(radius - 0.05, radius + 0.05, distance);
+	float circle_alpha = 1.0 - smoothstep(radius - edge_softness, radius + edge_softness, distance);
 	
 	// Enhanced anti-aliasing for the visibility texture
 	vec2 texel_size = 1.0 / textureSize(visibility_texture, 0);
@@ -35,8 +37,16 @@ void fragment() {
 	// Combine circle and visibility with smooth blending
 	float final_alpha = min(circle_alpha, final_visibility.a);
 	
-	// Apply additional edge smoothing
+	// Apply additional edge smoothing with multiple passes
 	final_alpha = smoothstep(0.0, 1.0, final_alpha);
+	final_alpha = smoothstep(0.0, 1.0, final_alpha); // Double smoothing for ultra-smooth edges
+	
+	// Add subtle vignette effect for more atmospheric lighting
+	float vignette = 1.0 - smoothstep(0.0, radius * 1.5, distance);
+	final_alpha = mix(final_alpha, final_alpha * vignette, vignette_strength);
+	
+	// Ensure we don't go below 0
+	final_alpha = max(0.0, final_alpha);
 	
 	COLOR = vec4(0.0, 0.0, 0.0, final_alpha);
 }

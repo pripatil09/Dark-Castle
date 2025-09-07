@@ -335,6 +335,9 @@ func create_tile(x: int, y: int, tile_type: int):
 			collision.add_child(collision_shape)
 			collision.position = Vector2(x * tile_size, y * tile_size)
 			add_child(collision)
+			
+			# LightOccluder2D temporarily disabled to fix crash
+			# TODO: Re-enable after fixing the crash
 	
 	add_child(tile)
 

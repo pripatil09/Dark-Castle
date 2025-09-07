@@ -76,4 +76,4 @@ ui_zoom_out={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-renderer/rendering_method.web="gl_compatibility"
+2d/use_pixel_snap=true

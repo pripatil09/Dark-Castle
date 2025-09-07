@@ -21,14 +21,10 @@ collision_layer = 2
 script = ExtResource("2_player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+scale = Vector2(3.8, 4.8)
 shape = SubResource("RectangleShape2D_1")
 
-[node name="Sprite2D" type="ColorRect" parent="Player"]
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-color = Color(0, 0.8, 1, 1)
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -91,6 +87,273 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Hotbar" type="Control" parent="UILayer/OverlayUI"]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 620.0
+offset_bottom = 110.0
+
+[node name="HotbarBackground" type="ColorRect" parent="UILayer/OverlayUI/Hotbar"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.2, 0.8)
+
+[node name="Slot1" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 7.5
+offset_top = 7.5
+offset_right = 67.5
+offset_bottom = 82.5
+
+[node name="Slot1Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot1"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot1Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot1"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="Slot2" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 75.0
+offset_top = 7.5
+offset_right = 135.0
+offset_bottom = 82.5
+
+[node name="Slot2Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot2"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot2Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot2"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="Slot3" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 142.5
+offset_top = 7.5
+offset_right = 202.5
+offset_bottom = 82.5
+
+[node name="Slot3Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot3"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot3Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot3"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "3"
+horizontal_alignment = 1
+
+[node name="Slot4" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 210.0
+offset_top = 7.5
+offset_right = 270.0
+offset_bottom = 82.5
+
+[node name="Slot4Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot4"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot4Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot4"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+
+[node name="Slot5" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 277.5
+offset_top = 7.5
+offset_right = 337.5
+offset_bottom = 82.5
+
+[node name="Slot5Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot5"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot5Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot5"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "5"
+horizontal_alignment = 1
+
+[node name="Slot6" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 345.0
+offset_top = 7.5
+offset_right = 405.0
+offset_bottom = 82.5
+
+[node name="Slot6Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot6"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot6Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot6"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "6"
+horizontal_alignment = 1
+
+[node name="Slot7" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 412.5
+offset_top = 7.5
+offset_right = 472.5
+offset_bottom = 82.5
+
+[node name="Slot7Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot7"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot7Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot7"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "7"
+horizontal_alignment = 1
+
+[node name="Slot8" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 480.0
+offset_top = 7.5
+offset_right = 540.0
+offset_bottom = 82.5
+
+[node name="Slot8Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot8"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot8Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot8"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "8"
+horizontal_alignment = 1
+
+[node name="Slot9" type="Control" parent="UILayer/OverlayUI/Hotbar"]
+anchors_preset = 0
+offset_left = 547.5
+offset_top = 7.5
+offset_right = 607.5
+offset_bottom = 82.5
+
+[node name="Slot9Background" type="ColorRect" parent="UILayer/OverlayUI/Hotbar/Slot9"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="Slot9Label" type="Label" parent="UILayer/OverlayUI/Hotbar/Slot9"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.5
+offset_top = -22.5
+offset_right = 37.5
+offset_bottom = -7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "9"
+horizontal_alignment = 1
 
 [node name="Spotlight" type="ColorRect" parent="UILayer/OverlayUI"]
 layout_mode = 1

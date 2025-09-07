@@ -1,8 +1,4 @@
+res://scripts/Player.gd
 res://scenes/Main.tscn
 res://shaders/vignette.gdshader
 res://shaders/simple_spotlight.gdshader
-res://scripts/DungeonGenerator.gd
-res://scripts/Spotlight.gd
-res://scripts/AudioManager.gd
-res://scripts/Player.gd
-res://scripts/FOVSystem.gd
