@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqxv8k7j8k7j8"]
+[gd_scene load_steps=10 format=3 uid="uid://bqxv8k7j8k7j8"]
 
 [ext_resource type="Script" uid="uid://dvc8da8yxnbtn" path="res://scripts/DungeonGenerator.gd" id="1_dungeon"]
 [ext_resource type="Script" uid="uid://dbjf04ds8mkxq" path="res://scripts/Player.gd" id="2_player"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://ldl7xeit6weq" path="res://piano-mystery-tense-cinematic-drone-333955.mp3" id="5_piano"]
 [ext_resource type="AudioStream" uid="uid://brsl5k1ae405q" path="res://strange-phenomena-dark-mysterious-ambient-385453.mp3" id="6_strange"]
 [ext_resource type="Script" uid="uid://mhyjp5bto48h" path="res://scripts/Spotlight.gd" id="7_spotlight"]
+[ext_resource type="Script" uid="uid://3ge7q54wcj6o" path="res://scripts/TutorialSystem.gd" id="9_tutorial"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(8, 8)
@@ -365,3 +366,12 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "9"
 horizontal_alignment = 1
+
+[node name="TutorialSystem" type="Control" parent="UILayer/OverlayUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_tutorial")

@@ -1,5 +1,13 @@
-res://scripts/Player.gd
 res://scenes/Main.tscn
 res://shaders/vignette.gdshader
 res://shaders/simple_spotlight.gdshader
+res://scripts/Player.gd
+res://scripts/TutorialSystem.gd
+res://scripts/BaseEnemy.gd
+res://scripts/DarkMageEnemy.gd
+res://scripts/DungeonGenerator.gd
+res://scripts/EnemySpriteGenerator.gd
+res://scripts/GoblinEnemy.gd
+res://scripts/SkeletonEnemy.gd
 res://scripts/Spotlight.gd
+res://scripts/SwordItem.gd

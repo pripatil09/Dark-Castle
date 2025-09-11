@@ -40,6 +40,12 @@ func generate_dungeon():
 	# Render the dungeon
 	render_dungeon()
 	
+	# Spawn items in random rooms
+	spawn_items()
+	
+	# Spawn enemies in random rooms
+	spawn_enemies()
+	
 
 func initialize_dungeon():
 	# Fill with walls
@@ -362,5 +368,146 @@ func get_random_floor_position() -> Vector2:
 				if dungeon_map[y][x] == 0:
 					var world_pos = Vector2(x * tile_size + tile_size/2, y * tile_size + tile_size/2)
 					return world_pos
-		# Last resort fallback
-		return Vector2(100, 100)
+	# Last resort fallback
+	return Vector2(100, 100)
+
+func spawn_items():
+	"""Spawn items randomly in rooms"""
+	# Always spawn one sword near the player
+	spawn_sword_near_player()
+	
+	# Spawn 1-2 additional swords in random rooms
+	var num_additional_swords = randi_range(1, 2)
+	var sword_rooms = []
+	
+	print("Attempting to spawn 1 sword near player + ", num_additional_swords, " swords in random rooms")
+	
+	# Select random rooms for additional swords
+	for i in range(num_additional_swords):
+		if rooms.size() > 0:
+			var random_room = rooms[randi() % rooms.size()]
+			sword_rooms.append(random_room)
+	
+	# Spawn additional swords in selected rooms
+	for room in sword_rooms:
+		spawn_sword_in_room(room)
+
+func spawn_sword_near_player():
+	"""Spawn a sword near the player's starting position"""
+	# Get player's starting position (first floor tile)
+	var player_pos = get_random_floor_position()
+	if player_pos != Vector2.ZERO:
+		# Spawn sword close to player (within 2 tiles)
+		var offset_x = randi_range(-2, 2) * tile_size
+		var offset_y = randi_range(-2, 2) * tile_size
+		var sword_pos = player_pos + Vector2(offset_x, offset_y)
+		
+		# Create sword item
+		var sword_item = Area2D.new()
+		sword_item.set_script(preload("res://scripts/SwordItem.gd"))
+		sword_item.global_position = sword_pos
+		
+		# Add to the scene
+		get_tree().current_scene.add_child(sword_item)
+		
+		print("Sword spawned near player at: ", sword_pos)
+
+func spawn_sword_in_room(room: Rect2):
+	"""Spawn a sword item in a specific room"""
+	# Find a random floor position within the room
+	var room_center_x = int(room.position.x + room.size.x / 2)
+	var room_center_y = int(room.position.y + room.size.y / 2)
+	
+	# Add some randomness to the position
+	var offset_x = randi_range(-int(room.size.x / 4), int(room.size.x / 4))
+	var offset_y = randi_range(-int(room.size.y / 4), int(room.size.y / 4))
+	
+	var sword_x = room_center_x + offset_x
+	var sword_y = room_center_y + offset_y
+	
+	# Convert to world coordinates
+	var world_pos = Vector2(sword_x * tile_size + tile_size/2, sword_y * tile_size + tile_size/2)
+	
+	# Create sword item
+	var sword_item = Area2D.new()
+	sword_item.set_script(preload("res://scripts/SwordItem.gd"))
+	sword_item.global_position = world_pos
+	
+	# Add to the scene
+	get_tree().current_scene.add_child(sword_item)
+	
+	print("Sword spawned at: ", world_pos)
+
+func spawn_enemies():
+	"""Spawn enemies in random rooms"""
+	if rooms.size() < 2:
+		return  # Need at least 2 rooms to spawn enemies
+	
+	# Spawn 1-3 enemies per room (except the first room where player starts)
+	var enemy_count = 0
+	var max_enemies = min(15, rooms.size() * 2)  # Cap at 15 enemies
+	
+	for i in range(1, rooms.size()):  # Skip first room (player starting room)
+		if enemy_count >= max_enemies:
+			break
+		
+		var room = rooms[i]
+		var enemies_in_room = randi_range(1, 3)
+		
+		for j in range(enemies_in_room):
+			if enemy_count >= max_enemies:
+				break
+			
+			spawn_enemy_in_room(room)
+			enemy_count += 1
+	
+	print("Spawned ", enemy_count, " enemies")
+
+func spawn_enemy_in_room(room: Rect2):
+	"""Spawn a random enemy in a specific room"""
+	# Find a random floor position within the room
+	var room_center_x = int(room.position.x + room.size.x / 2)
+	var room_center_y = int(room.position.y + room.size.y / 2)
+	
+	# Add some randomness to the position
+	var offset_x = randi_range(-int(room.size.x / 3), int(room.size.x / 3))
+	var offset_y = randi_range(-int(room.size.y / 3), int(room.size.y / 3))
+	
+	var enemy_x = room_center_x + offset_x
+	var enemy_y = room_center_y + offset_y
+	
+	# Convert to world coordinates
+	var world_pos = Vector2(enemy_x * tile_size + tile_size/2, enemy_y * tile_size + tile_size/2)
+	
+	# Choose random enemy type
+	var enemy_types = ["skeleton", "goblin", "dark_mage"]
+	var enemy_type = enemy_types[randi() % enemy_types.size()]
+	
+	# Create enemy
+	var enemy = CharacterBody2D.new()
+	enemy.global_position = world_pos
+	
+	# Add collision shape
+	var collision_shape = CollisionShape2D.new()
+	var rectangle_shape = RectangleShape2D.new()
+	rectangle_shape.size = Vector2(16, 16)
+	collision_shape.shape = rectangle_shape
+	enemy.add_child(collision_shape)
+	
+	# Add sprite
+	var sprite = Sprite2D.new()
+	enemy.add_child(sprite)
+	
+	# Set script based on enemy type
+	match enemy_type:
+		"skeleton":
+			enemy.set_script(preload("res://scripts/SkeletonEnemy.gd"))
+		"goblin":
+			enemy.set_script(preload("res://scripts/GoblinEnemy.gd"))
+		"dark_mage":
+			enemy.set_script(preload("res://scripts/DarkMageEnemy.gd"))
+	
+	# Add to the scene
+	get_tree().current_scene.add_child(enemy)
+	
+	print("Spawned ", enemy_type, " at: ", world_pos)

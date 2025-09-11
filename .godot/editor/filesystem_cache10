@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1757277839
+::res://::1757352207
 AUDIO_SETUP.md::TextFile/TextFile::-1::1757077781::0::1::::<><><>0<>0<><>::
 export_presets.cfg::TextFile/TextFile::-1::1757183914::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D/CompressedTexture2D::4843289249053927924::1756839917::1757026943::1::::<><><>0<>0<>9a22c870673a4c9d52428820e3bb8b28<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
@@ -11,7 +11,7 @@ index.apple-touch-icon.png::CompressedTexture2D/CompressedTexture2D::44134024504
 index.icon.png::CompressedTexture2D/CompressedTexture2D::2712995920302459693::1757183914::1757184183::1::::<><><>0<>0<>82efbefac2029c655dd3645ff4e46df8<>res://.godot/imported/index.icon.png-c6917d20675938bcf1d743f340e0c29e.ctex::
 index.png::CompressedTexture2D/CompressedTexture2D::8835437919780095655::1757183914::1757184183::1::::<><><>0<>0<>578a0357406b3f17048d758232c24a4e<>res://.godot/imported/index.png-d5189952a22e4f203e515b25e9f2f0d5.ctex::
 ::res://desktop_demo/::1757183055
-::res://playerAnimations/::1757275652
+::res://playerAnimations/::1757379125
 ::res://playerAnimations/StandStillFaceLeft/::1757275658
 MCStillLeft0.png::CompressedTexture2D/CompressedTexture2D::1120843354225193866::1757275406::1757275658::1::::<><><>0<>0<>c577e14f461dfc9d497c6b082f3b31f8<>res://.godot/imported/MCStillLeft0.png-ffa29291867fbd4acd7b0ddc1d40d222.ctex::
 MCStillLeft1.png::CompressedTexture2D/CompressedTexture2D::4868440525089876562::1757275406::1757275658::1::::<><><>0<>0<>9110f549d8c7cf87a7de1a7909db7705<>res://.godot/imported/MCStillLeft1.png-de410ee9ea46be4a7adf0b6f4464521d.ctex::
@@ -26,6 +26,19 @@ MCStillLeft2.png::CompressedTexture2D/CompressedTexture2D::1917313461442900722::
 MCStillLeft3.png::CompressedTexture2D/CompressedTexture2D::6889906524183566392::1757275626::1757275658::1::::<><><>0<>0<>9711f6a9b3ddbba2ec680730e5517c81<>res://.godot/imported/MCStillLeft3.png-44baf6d4810b46869a5d355e8c253aa9.ctex::
 MCStillLeft4.png::CompressedTexture2D/CompressedTexture2D::8695997102346698140::1757275626::1757275658::1::::<><><>0<>0<>1339edf9dad491590dc7a4e5b49f0ad8<>res://.godot/imported/MCStillLeft4.png-ef6505969f93432587806a00ab23bcd1.ctex::
 MCStillLeft5.png::CompressedTexture2D/CompressedTexture2D::4096575983638013815::1757275626::1757275658::1::::<><><>0<>0<>af207241e599d20ab4897a0b932d728e<>res://.godot/imported/MCStillLeft5.png-773b6248bf258a1764be6fbd83ca4ca6.ctex::
+::res://playerAnimations/swordslash/::1757305841
+sword slash00.png::CompressedTexture2D/CompressedTexture2D::5770485996093308850::1757305688::1757305841::1::::<><><>0<>0<>b2e3e6e571d0c2126edb5b594452885e<>res://.godot/imported/sword slash00.png-d51dd307ffc2ec39c4a8d52562586b81.ctex::
+sword slash01.png::CompressedTexture2D/CompressedTexture2D::8004389807499701607::1757305688::1757305841::1::::<><><>0<>0<>e3a39623582b9ca6e84228f96a164c79<>res://.godot/imported/sword slash01.png-479cc1fd74134dfc63cf89af833e3381.ctex::
+sword slash02.png::CompressedTexture2D/CompressedTexture2D::3920080413698870600::1757305688::1757305841::1::::<><><>0<>0<>b22519bd025624a4616379f7b9594fdc<>res://.godot/imported/sword slash02.png-4f892403cd00a4a7673ea2f5ca94d84b.ctex::
+sword slash03.png::CompressedTexture2D/CompressedTexture2D::9182880256685483986::1757305688::1757305841::1::::<><><>0<>0<>822fdc4bb18252f7a545aa60c3b94f1e<>res://.godot/imported/sword slash03.png-dd4eacb1797c4f5cdd1777cb365a4da0.ctex::
+sword slash04.png::CompressedTexture2D/CompressedTexture2D::4134055266351369826::1757305688::1757305841::1::::<><><>0<>0<>1c897ce963db498958cbd7049211782a<>res://.godot/imported/sword slash04.png-a0f269e5fe1f2c7d3033d62c1bca93c7.ctex::
+sword slash05.png::CompressedTexture2D/CompressedTexture2D::6150348638586125111::1757305688::1757305841::1::::<><><>0<>0<>16b0733dad16d5f823d82a96088f8548<>res://.godot/imported/sword slash05.png-d6d8b71323371efb4889335d806ff413.ctex::
+sword slash06.png::CompressedTexture2D/CompressedTexture2D::7641895481143033316::1757305688::1757305841::1::::<><><>0<>0<>a4e6e718e4ada37c85f6f26f5028988f<>res://.godot/imported/sword slash06.png-be63b8969952b0f4cdf12d8014b7d48a.ctex::
+sword slash07.png::CompressedTexture2D/CompressedTexture2D::2372663128852978894::1757305688::1757305841::1::::<><><>0<>0<>bff231ad30c10c9008806fe312cb44e4<>res://.godot/imported/sword slash07.png-17f5188c1be4b0f588f172213b76354f.ctex::
+sword slash08.png::CompressedTexture2D/CompressedTexture2D::7022234415089499407::1757305688::1757305841::1::::<><><>0<>0<>a6c1d499b564501ad8d8e0ae4ca83d3b<>res://.godot/imported/sword slash08.png-cf309e2f3148dc99f35bc952a8534c18.ctex::
+sword slash09.png::CompressedTexture2D/CompressedTexture2D::2053505400549389970::1757305688::1757305841::1::::<><><>0<>0<>983d64a92a19a0c1e5115c9f5654f583<>res://.godot/imported/sword slash09.png-7fad98df5226657b940e596eda159440.ctex::
+sword slash10.png::CompressedTexture2D/CompressedTexture2D::5904341243516073650::1757305688::1757305841::1::::<><><>0<>0<>90a2b65f98707d7507502ffeae2dae7b<>res://.godot/imported/sword slash10.png-93017313ad64ec61c0f62091eb772ee5.ctex::
+sword slash11.png::CompressedTexture2D/CompressedTexture2D::6709587404453181880::1757305688::1757305841::1::::<><><>0<>0<>24ed0e81ec19c764f2e9bb5dcecbfb4d<>res://.godot/imported/sword slash11.png-17cc4115d332a57b46b4a2c21d1d5569.ctex::
 ::res://playerAnimations/WalkLeft/::1757275658
 MCWalkLeft0.png::CompressedTexture2D/CompressedTexture2D::1930019420665256130::1757275178::1757275658::1::::<><><>0<>0<>02a672d7c178af01d4f5979d8bab6cb3<>res://.godot/imported/MCWalkLeft0.png-fb22e7282c75da1804999309f547956b.ctex::
 MCWalkLeft1.png::CompressedTexture2D/CompressedTexture2D::2986315790440345531::1757275178::1757275658::1::::<><><>0<>0<>cba1dd92ed742cbe4b52b75f995339f7<>res://.godot/imported/MCWalkLeft1.png-1dfa586bab80073bbad7ddb9bd4ee7f5.ctex::
@@ -36,19 +49,27 @@ MCWalkRIght0.png::CompressedTexture2D/CompressedTexture2D::8219619351448691024::
 MCWalkRIght1.png::CompressedTexture2D/CompressedTexture2D::5983142016329371728::1757275066::1757275658::1::::<><><>0<>0<>98377f77913bb4e9b09fe7b428384a12<>res://.godot/imported/MCWalkRIght1.png-08cd5be60c56f15a440ff5c63da25639.ctex::
 MCWalkRIght2.png::CompressedTexture2D/CompressedTexture2D::7307494843127790219::1757275066::1757275658::1::::<><><>0<>0<>8549109ae1dfc6f84a7a7a90e7ef0418<>res://.godot/imported/MCWalkRIght2.png-dfe0c0ab7b16655ff25724eff2e57ab1.ctex::
 MCWalkRIght3.png::CompressedTexture2D/CompressedTexture2D::7717114778733613537::1757275066::1757275658::1::::<><><>0<>0<>1dd0217315d34e5397359a07102f210f<>res://.godot/imported/MCWalkRIght3.png-453d218791a4ca55b0c94c735166bb22.ctex::
-::res://scenes/::1757277825
-Main.tscn::PackedScene::3558257433412642387::1757277825::0::1::::<><><>0<>0<><>::uid://dvc8da8yxnbtn::::res://scripts/DungeonGenerator.gd<>uid://dbjf04ds8mkxq::::res://scripts/Player.gd<>uid://bqv5myhmolknn::::res://scripts/AudioManager.gd<>uid://bfurv8403xjn3::::res://mysterious-dark-background-310162.mp3<>uid://ldl7xeit6weq::::res://piano-mystery-tense-cinematic-drone-333955.mp3<>uid://brsl5k1ae405q::::res://strange-phenomena-dark-mysterious-ambient-385453.mp3<>uid://mhyjp5bto48h::::res://scripts/Spotlight.gd
-::res://scripts/::1757262044
+::res://scenes/::1757539782
+Main.tscn::PackedScene::3558257433412642387::1757539829::0::1::::<><><>0<>0<><>::uid://dvc8da8yxnbtn::::res://scripts/DungeonGenerator.gd<>uid://dbjf04ds8mkxq::::res://scripts/Player.gd<>uid://bqv5myhmolknn::::res://scripts/AudioManager.gd<>uid://bfurv8403xjn3::::res://mysterious-dark-background-310162.mp3<>uid://ldl7xeit6weq::::res://piano-mystery-tense-cinematic-drone-333955.mp3<>uid://brsl5k1ae405q::::res://strange-phenomena-dark-mysterious-ambient-385453.mp3<>uid://mhyjp5bto48h::::res://scripts/Spotlight.gd<>res://scenes/TutorialUI.tscn<>res://scripts/TutorialSystem.gd
+TutorialUI.tscn::PackedScene::-1::1757539829::0::1::::<><><>0<>0<><>::
+::res://scripts/::1757540004
 AudioManager.gd::GDScript/GDScript::3554638325985139687::1757115347::0::1::::<>Node<><>0<>0<><>::
+BaseEnemy.gd::GDScript::7152670797584088646::1757540050::0::1::::BaseEnemy<>CharacterBody2D<><>0<>0<><>::
+DarkMageEnemy.gd::GDScript::1150828306636627917::1757540050::0::1::::<>BaseEnemy<><>0<>0<><>::
 DistanceFieldLighting.gd::GDScript/GDScript::9076412609474219299::1757203718::0::1::::<>ColorRect<><>0<>0<><>::
-DungeonGenerator.gd::GDScript/GDScript::8639365593229355183::1757206263::0::1::::<>Node2D<><>0<>0<><>::
-Player.gd::GDScript::7248380052989316406::1757277743::0::1::::<>CharacterBody2D<><>0<>0<><>::
+DungeonGenerator.gd::GDScript::8639365593229355183::1757540050::0::1::::<>Node2D<><>0<>0<><>::
+EnemySpriteGenerator.gd::GDScript::6955692817492175520::1757540050::0::1::::<>Node<><>0<>0<><>::
+GoblinEnemy.gd::GDScript::2200607080536062781::1757540050::0::1::::<>BaseEnemy<><>0<>0<><>::
+Player.gd::GDScript::7248380052989316406::1757540050::0::1::::<>CharacterBody2D<><>0<>0<><>::
 SimpleLighting.gd::GDScript/GDScript::6935336216964171555::1757207405::0::1::::<>ColorRect<><>0<>0<><>::
-Spotlight.gd::GDScript::858190882172141597::1757277349::0::1::::<>ColorRect<><>0<>0<><>::
+SkeletonEnemy.gd::GDScript::4626004161931314133::1757540050::0::1::::<>BaseEnemy<><>0<>0<><>::
+Spotlight.gd::GDScript::858190882172141597::1757540050::0::1::::<>ColorRect<><>0<>0<><>::
+SwordItem.gd::GDScript::2490251943438497567::1757539678::0::1::::<>Area2D<><>0<>0<><>::
 TileBasedLighting.gd::GDScript/GDScript::963133143272272584::1757203901::0::1::::<>ColorRect<><>0<>0<><>::
-::res://shaders/::1757277690
+TutorialSystem.gd::GDScript::1977974789830139488::1757539829::0::1::::<>Control<><>0<>0<><>::
+::res://shaders/::1757471341
 distance_field_lighting.gdshader::Shader/Shader::4104423230118217146::1757203718::0::1::::<><><>0<>0<><>::
-ray_traced_spotlight.gdshader::Shader/Shader::3438386729585576057::1757267479::0::1::::<><><>0<>0<><>::
-simple_spotlight.gdshader::Shader::6937597066039845946::1757277690::0::1::::<><><>0<>0<><>::
+ray_traced_spotlight.gdshader::Shader::3438386729585576057::1757539678::0::1::::<><><>0<>0<><>::
+simple_spotlight.gdshader::Shader::6937597066039845946::1757471341::0::1::::<><><>0<>0<><>::
 spotlight.gdshader::Shader/Shader::629365836830916209::1757115339::0::1::::<><><>0<>0<><>::
-vignette.gdshader::Shader::1526865354314315614::1757277690::0::1::::<><><>0<>0<><>::
+vignette.gdshader::Shader::1526865354314315614::1757471341::0::1::::<><><>0<>0<><>::

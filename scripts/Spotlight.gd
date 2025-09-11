@@ -2,12 +2,13 @@ extends ColorRect
 
 var player
 var spotlight_enabled = true
-var ray_count = 24
+var ray_count = 40
 var max_ray_distance = 150.0
-var num_rays = 100  # Easy to adjust: number of rays for visibility
-var ray_thickness = 30  # Thickness of each ray in pixels
+var num_rays = 40  # Reduced for better performance
+var ray_thickness = 15  # Reduced thickness for better performance
 var visibility_texture: ImageTexture
 var debug_mode = false
+var tutorial_system: Control
 
 # Removed complex ray casting - now using simple 8-direction approach
 
@@ -46,9 +47,15 @@ func find_player():
 		if node:
 			player = node
 			print("Player found at path: ", path)
-			return
+			break
 	
-	print("Player not found at any path!")
+	# Also find tutorial system
+	tutorial_system = get_node_or_null("../TutorialSystem")
+	if not tutorial_system:
+		tutorial_system = get_node_or_null("../../TutorialSystem")
+	
+	if not player:
+		print("Player not found at any path!")
 
 func create_visibility_texture():
 	# Create a much smaller texture for better performance
@@ -121,18 +128,22 @@ func draw_thick_line_fast(image: Image, start: Vector2, end: Vector2, center_wor
 		draw_simple_line(image, start_offset, end_offset, texture_size)
 
 func draw_simple_line(image: Image, start: Vector2, end: Vector2, texture_size: int):
-	"""Very simple line drawing - much faster than Bresenham"""
+	"""Optimized line drawing to prevent black dots without lag"""
 	var steps = int(start.distance_to(end))
 	if steps == 0:
 		return
 		
+	# Limit steps to prevent lag
+	steps = min(steps, 180)  # Maximum 20 steps
 	var step = 1.0 / steps
+	
 	for i in range(steps + 1):
 		var t = i * step
 		var pos = start.lerp(end, t)
-		var x = int(pos.x)
-		var y = int(pos.y)
+		var x = int(round(pos.x))
+		var y = int(round(pos.y))
 		
+		# Only draw the main pixel, no extra circles to reduce lag
 		if x >= 0 and x < texture_size and y >= 0 and y < texture_size:
 			image.set_pixel(x, y, Color(0, 0, 0, 0))  # Transparent for visible areas
 
@@ -160,6 +171,10 @@ func _input(event):
 		if event.keycode == KEY_Z:
 			spotlight_enabled = !spotlight_enabled
 			visible = spotlight_enabled
+			
+			# Notify tutorial system of lighting toggle
+			if tutorial_system:
+				tutorial_system.check_tutorial_action("lighting")
 		elif event.keycode == KEY_2:
 			debug_mode = !debug_mode
 			print("Debug mode: ", debug_mode)
