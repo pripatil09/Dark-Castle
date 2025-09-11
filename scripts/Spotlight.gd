@@ -4,8 +4,8 @@ var player
 var spotlight_enabled = true
 var ray_count = 40
 var max_ray_distance = 150.0
-var num_rays = 40  # Reduced for better performance
-var ray_thickness = 15  # Reduced thickness for better performance
+var num_rays = 360  # Much fewer rays for better performance
+var ray_thickness = 4  # Thinner rays for better performance
 var visibility_texture: ImageTexture
 var debug_mode = false
 var tutorial_system: Control
@@ -24,6 +24,9 @@ func _ready():
 	# Create visibility texture
 	visibility_texture = ImageTexture.new()
 	create_visibility_texture()
+	
+	# Pre-calculate ray directions for better performance
+	generate_cached_ray_directions()
 	
 	# Create shader that uses only ray casting visibility texture
 	var shader_code = "shader_type canvas_item; uniform sampler2D visibility_texture; void fragment() { vec4 visibility_color = texture(visibility_texture, UV); COLOR = vec4(0.0, 0.0, 0.0, visibility_color.a); }"
@@ -57,6 +60,20 @@ func find_player():
 	if not player:
 		print("Player not found at any path!")
 
+func generate_cached_ray_directions():
+	"""Pre-calculate ray directions to avoid recalculating every frame"""
+	cached_ray_directions.clear()
+	for i in range(num_rays):
+		var angle = (i * 2.0 * PI) / num_rays
+		var direction = Vector2(cos(angle), sin(angle))
+		cached_ray_directions.append(direction)
+	print("Cached ", cached_ray_directions.size(), " ray directions")
+
+func create_visibility_texture_deferred():
+	"""Deferred version that doesn't block the main thread"""
+	create_visibility_texture()
+	is_updating_texture = false
+
 func create_visibility_texture():
 	# Create a much smaller texture for better performance
 	var image = Image.create(256, 256, false, Image.FORMAT_RGBA8)
@@ -77,14 +94,8 @@ func draw_circle_visibility(image: Image, player_pos: Vector2, space_state: Phys
 	var center_world = player_pos
 	var world_to_texture_scale = 0.5  # Even smaller scale for performance
 	
-	# Generate ray directions based on num_rays variable
-	var ray_directions = []
-	for i in range(num_rays):
-		var angle = (i * 2.0 * PI) / num_rays
-		var direction = Vector2(cos(angle), sin(angle))
-		ray_directions.append(direction)
-	
-	for direction in ray_directions:
+	# Use pre-calculated ray directions for better performance
+	for direction in cached_ray_directions:
 		var end_pos = player_pos + direction * max_ray_distance
 		
 		# Cast ray
@@ -133,10 +144,19 @@ func draw_simple_line(image: Image, start: Vector2, end: Vector2, texture_size: 
 	if steps == 0:
 		return
 		
+	# Early exit for very short lines
+	if steps < 2:
+		var x = int(round(start.x))
+		var y = int(round(start.y))
+		if x >= 0 and x < texture_size and y >= 0 and y < texture_size:
+			image.set_pixel(x, y, Color(0, 0, 0, 0))
+		return
+		
 	# Limit steps to prevent lag
-	steps = min(steps, 180)  # Maximum 20 steps
+	steps = min(steps, 100)  # Maximum 100 steps for better performance
 	var step = 1.0 / steps
 	
+	# Draw all steps for better quality
 	for i in range(steps + 1):
 		var t = i * step
 		var pos = start.lerp(end, t)
@@ -151,18 +171,41 @@ func draw_simple_line(image: Image, start: Vector2, end: Vector2, texture_size: 
 
 var update_counter = 0
 var last_player_position = Vector2.ZERO
-var position_threshold = 5.0  # Only update if player moved more than 5 pixels
+var position_threshold = 10.0  # Only update if player moved more than 10 pixels
+var frame_skip_counter = 20
+var cached_ray_directions = []
+var is_updating_texture = false
+var time_accumulator = 0.0
+var min_update_interval = 0.05  # Minimum 50ms between updates (20 FPS)
+var heavy_operation_timer = 0.0
+var heavy_operation_interval = 0.15  # Heavy operations every 150ms
+var last_camera_position = Vector2.ZERO
+var camera_movement_threshold = 20.0
 
-func _process(_delta):
+func _physics_process(_delta):
 	if player and spotlight_enabled:
+		time_accumulator += _delta
+		heavy_operation_timer += _delta
+		
 		var current_pos = player.global_position
 		var distance_moved = current_pos.distance_to(last_player_position)
+		var camera_moved = current_pos.distance_to(last_camera_position)
 		
-		# Only update if player moved significantly or every 10 frames
+		# Only update if player moved significantly or every 60 frames
 		update_counter += 1
-		if distance_moved > position_threshold or update_counter % 10 == 0:
-			create_visibility_texture()
+		frame_skip_counter += 1
+		
+		# Smart update: only when player moves significantly OR camera moves significantly OR periodic update
+		var should_update = (distance_moved > position_threshold) or (camera_moved > camera_movement_threshold) or (update_counter % 60 == 0 and frame_skip_counter % 3 == 0)
+		
+		# Skip every other frame for heavy operations AND enforce minimum time interval
+		if not is_updating_texture and time_accumulator > min_update_interval and heavy_operation_timer > heavy_operation_interval and should_update:
+			is_updating_texture = true
+			time_accumulator = 0.0
+			heavy_operation_timer = 0.0
+			call_deferred("create_visibility_texture_deferred")
 			last_player_position = current_pos
+			last_camera_position = current_pos
 	else:
 		print("Spotlight process: player=", player != null, " enabled=", spotlight_enabled)
 

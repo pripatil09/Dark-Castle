@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var max_health = 100
 
 # Dash mechanics
-@export var dash_speed = 600.0  # Increased from 400.0 (1.5x)
+@export var dash_speed = 900.0  # Increased from 400.0 (1.5x)
 @export var dash_duration = 0.15
 @export var dash_cooldown = 1.0
 
@@ -1014,7 +1014,7 @@ func cycle_sword_frames(sprite: Sprite2D, frames: Array, frame_index: int):
 	
 	# Schedule next frame
 	var timer = Timer.new()
-	timer.wait_time = 0.01  # 60 FPS - 0.0167 seconds per frame
+	timer.wait_time = 0.005  # 200 FPS - much faster animation
 	timer.one_shot = true
 	timer.timeout.connect(cycle_sword_frames.bind(sprite, frames, frame_index + 1))
 	add_child(timer)
